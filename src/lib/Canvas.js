@@ -33,7 +33,8 @@ const Canvas = ({
   pointBorder,
   lineColor,
   maxWidth,
-  maxHeight
+  maxHeight,
+  autoDetectContours
 }) => {
   const { loaded: cvLoaded, cv } = useOpenCv()
   const canvasRef = useRef()
@@ -191,7 +192,22 @@ const Canvas = ({
       const src = await readFile(image)
       await createCanvas(src)
       showPreview()
-      detectContours()
+      if (autoDetectContours) {
+        detectContours()
+      } else {
+        const width = canvasRef.current.width * imageResizeRatio
+        const height = canvasRef.current.height * imageResizeRatio
+
+        setCropPoints({
+          'left-top': { x: 0, y: 0 },
+          'right-top': { x: width, y: 0 },
+          'right-bottom': {
+            x: width,
+            y: height
+          },
+          'left-bottom': { x: 0, y: height }
+        })
+      }
       setLoading(false)
     }
 
@@ -308,5 +324,6 @@ Canvas.propTypes = {
   lineWidth: T.number,
   pointBgColor: T.string,
   pointBorder: T.string,
-  lineColor: T.string
+  lineColor: T.string,
+  autoDetectContours: T.bool
 }

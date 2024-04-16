@@ -23,6 +23,7 @@ declare module "react-perspective-cropper" {
     maxWidth: number;
     maxHeight: number;
     openCvPath: string;
+    autoDetectContours: boolean;
   }
 
   export interface CropperRef extends React.ElementRef {

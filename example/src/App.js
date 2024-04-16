@@ -78,6 +78,7 @@ const App = () => {
           onChange={onChange}
           onDragStop={onDragStop}
           maxWidth={window.innerWidth - 10}
+          autoDetectContours={false}
         />
         {cropState?.loading && <Spin />}
         {!img && (
