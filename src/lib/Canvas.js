@@ -195,8 +195,8 @@ const Canvas = ({
       if (autoDetectContours) {
         detectContours()
       } else {
-        const width = canvasRef.current.width * imageResizeRatio
-        const height = canvasRef.current.height * imageResizeRatio
+        const width = previewCanvasRef.current.width
+        const height = previewCanvasRef.current.height
 
         setCropPoints({
           'left-top': { x: 0, y: 0 },
